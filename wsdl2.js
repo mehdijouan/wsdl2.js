@@ -94,15 +94,15 @@ function processWSDL(json) {
   processTypes(json);
 
   var serviceDefinition = "module.exports = "+JSON.stringify(services,null,2);
-  fs.writeFile(process.cwd()+"/"+serviceName+'/ServiceDefinition.js', serviceDefinition);
+  fs.writeFileSync(process.cwd()+"/"+serviceName+'/ServiceDefinition.js', serviceDefinition);
 
   var modelerFile = fs.readFileSync(__dirname+"/lib/Modeler.js");
-  fs.writeFile(process.cwd()+"/"+serviceName+'/Modeler.js', modelerFile);
+  fs.writeFileSync(process.cwd()+"/"+serviceName+'/Modeler.js', modelerFile);
 
   var indexFile = fs.readFileSync(__dirname+"/lib/serviceProvider.js", 'utf8');
   indexFile = indexFile.replace("###1###", contentTypeHeaders[soapVersion]);
   indexFile = indexFile.replace('###2###', keepEmptyTags);
-  fs.writeFile(process.cwd()+"/"+serviceName+'/index.js', indexFile);
+  fs.writeFileSync(process.cwd()+"/"+serviceName+'/index.js', indexFile);
 };
 
 /*****************************************
